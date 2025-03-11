@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>森阔变频器选型系统</title>
+    <meta name="keywords" content="变频器选型,工业变频器,变频器计算,电机控制">
+    <meta name="description" content="工业变频器智能选型系统 - 精准计算，快速匹配">
+    <!-- 引入 pdfmake -->
+    <script src="https://cdn.jsdelivr.net/npm/pdfmake/build/pdfmake.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdfmake/build/vfs_fonts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="main-container">
+        <div class="calculator">
+            <div class="lang-switch" id="translate"></div>
+            <div class="loader"><div class="spinner"></div></div>
+            <h1>森阔® 变频器选型系统</h1>
+            <div class="input-grid">
+                <div class="input-group">
+                    <label>电机功率 (kW):</label>
+                    <input type="number" id="power" step="0.1" required>
+                </div>
+                <div class="input-group">
+                    <label>电压等级:</label>
+                    <select id="voltageClass" onchange="updateVoltage()">
+                        <option value="380">低压 380V</option>
+                        <option value="690">中压 690V</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>输入电压 (V):</label>
+                    <input type="number" id="voltage" required>
+                </div>
+                <div class="input-group">
+                    <label>功率因数:</label>
+                    <input type="number" id="powerFactor" step="0.01" min="0.8" max="1" value="0.85">
+                </div>
+                <div class="input-group">
+                    <label>电机效率 (%):</label>
+                    <input type="number" id="efficiency" step="1" min="80" max="98" value="90">
+                </div>
+                <div class="input-group">
+                    <label>过载要求 (%):</label>
+                    <input type="number" id="overload" step="5" min="100" max="200" value="120">
+                </div>
+                <div class="input-group">
+                    <label>负载类型:</label>
+                    <select id="loadType">
+                        <option value="1.0">常规负载</option>
+                        <option value="1.15">重载</option>
+                        <option value="1.3">超重载</option>
+                    </select>
+                </div>
+            </div>
+            <button class="calculate-btn" onclick="calculate()">立即计算</button>
+            <div class="result-panel" id="result" style="display:none">
+                <h3>选型结果</h3>
+                <table class="spec-table">
+                    <thead>
+                        <tr>
+                            <th>推荐功率</th>
+                            <th>额定电流</th>
+                            <th>适配型号</th>
+                            <th>电压等级</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="rec-power">-</td>
+                            <td id="rec-current">-</td>
+                            <td id="rec-model">-</td>
+                            <td id="rec-voltage">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="chart-container">
+                <canvas id="specChart"></canvas>
+            </div>
+            <button class="export-btn" onclick="exportPDF()">导出报告</button>
+        </div>
+        <div class="info-panel">
+            <img src="https://blog.lyskjd.com/image/BPQ/3.jpg" alt="变频器产品图" class="product-image">
+
+            <div class="contact-card">
+                <h3>联系我们</h3>
+                <p>服务热线：+86 150-6499-9739</p>
+                <p>邮箱：sales@lyskjd.com</p>
+                <p>地址：中国山东省临沂市兰山区通达路与清河北路交汇东北角</p>
+            </div>
+        </div>
+    </div>
+    <footer class="version-footer">
+        © 2025 <a href="https://www.lyskjd.com" title="变频器厂家选型系统">临沂森阔机电有限公司</a> 版权所有 | 版本 2.1.0 | 认证编号：PD-2023-ICSS
+    </footer>
+
+    <script src="./main.js"></script>
+    <script src="https://cdn.staticfile.net/translate.js/3.12.0/translate.js"></script>
+    <script>
+        translate.language.setLocal('chinese_simplified');
+        translate.selectLanguageTag.languages = 'english,chinese_simplified,chinese_traditional,spanish,french,arabic,russian,portuguese,japanese,korean';
+        translate.service.use('client.edge');
+        translate.execute();
+    </script>
+    <script async data-nf='{"formurl":"https://noteforms.com/forms/product-inquiry-and-quote-request-form-z4dvsw","emoji":"💬","position":"right","bgcolor":"#64748b","width":"500"}' src='https://noteforms.com/widgets/embed-min.js'></script>
+
+</body>
+</html>
